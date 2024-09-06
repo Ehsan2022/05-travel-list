@@ -18,6 +18,10 @@ export default function App() {
       )
     );
   }
+  function handelClearList() {
+    const confirmed = window.confirm("Delete all items?");
+    if (confirmed) setItems([]);
+  }
 
   return (
     <div className="app">
@@ -26,7 +30,8 @@ export default function App() {
       <PackingList
         items={items}
         handleDeleteItem={handleDeleteItem}
-        handleToggleItem={handleToggleItem}></PackingList>
+        handleToggleItem={handleToggleItem}
+        handelClearList={handelClearList}></PackingList>
       <Stats items={items}></Stats>
     </div>
   );
@@ -74,11 +79,29 @@ function Form({ handleAddItem }) {
     </form>
   );
 }
-function PackingList({ items, handleDeleteItem, handleToggleItem }) {
+function PackingList({
+  items,
+  handleDeleteItem,
+  handleToggleItem,
+  handelClearList,
+}) {
+  const [sortBy, setSortBy] = useState("input");
+  let sortedItems;
+
+  if (sortBy === "input") sortedItems = items;
+  if (sortBy === "description")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+  if (sortBy === "packed")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => Number(a.packed) - Number(b.packed));
+
   return (
     <div className="list">
       <ul>
-        {items.map((item) => (
+        {sortedItems.map((item) => (
           <Item
             item={item}
             key={item.id}
@@ -86,6 +109,14 @@ function PackingList({ items, handleDeleteItem, handleToggleItem }) {
             handleToggleItem={handleToggleItem}></Item>
         ))}
       </ul>
+      <div className="actions">
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="input">Sort by input order</option>
+          <option value="description">Sort by description</option>
+          <option value="packed">Sort by packed status</option>
+        </select>
+        <button onClick={handelClearList}>Clear List</button>
+      </div>
     </div>
   );
 }
@@ -113,7 +144,9 @@ function Stats({ items }) {
   return (
     <footer className="stats">
       <em>
-        {percentage === 100
+        {numItems === 0
+          ? "Start adding some items to your packing list 🚀"
+          : percentage === 100
           ? "You got everything! Ready to go ✈️"
           : `You have ${numItems} items on your list, and you already packed ${numPacked} (${
               percentage === 0 ? "0" : percentage
