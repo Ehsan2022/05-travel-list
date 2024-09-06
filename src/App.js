@@ -1,9 +1,9 @@
 /** @format */
 
 import { useState } from "react";
-import { Logo } from "./Logo";
-import { Form } from "./Form";
-import { PackingList } from "./PackingList";
+import  Logo  from "./Logo";
+import  Form  from "./Form";
+import  PackingList  from "./PackingList";
 
 export default function App() {
   const [items, setItems] = useState([]);
@@ -40,23 +40,6 @@ export default function App() {
   );
 }
 
-export function Item({ item, handleDeleteItem, handleToggleItem }) {
-  return (
-    <li>
-      <input
-        type="checkbox"
-        value={item.packed}
-        onChange={() => handleToggleItem(item.id)}
-      />
-      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        {item.quantity} {item.description}
-      </span>
-      <button onClick={() => handleDeleteItem(item.id)}>
-        <span>X</span>
-      </button>
-    </li>
-  );
-}
 function Stats({ items }) {
   const numItems = items.length;
   const numPacked = items.filter((item) => item.packed).length;
