@@ -1,3 +1,5 @@
+/** @format */
+
 import { useState } from "react";
 
 export default function Form({ handleAddItem }) {
@@ -19,7 +21,7 @@ export default function Form({ handleAddItem }) {
   }
   return (
     <form className="add-form" onSubmit={handleSubmit}>
-      <h3>What dou you need for your ♥ trip?</h3>
+      <h3>What do you need for your trip?</h3>
       <select
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}>
@@ -33,7 +35,8 @@ export default function Form({ handleAddItem }) {
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="item..." />
+        placeholder="item..."
+      />
       <button>Add</button>
     </form>
   );
