@@ -1,3 +1,4 @@
+/** @format */
 
 * {
   margin: 0;
@@ -61,11 +62,11 @@ select,
 input {
   background-color: white;
   color: black;
-  box-shadow: 0 0 5px .9px black;
+  box-shadow: 0 0 5px 0.9px black;
   font-family: inherit;
   border: none;
   border-radius: 5px;
-  padding: .5rem 3.2rem;
+  padding: 0.5rem 3.2rem;
   font-weight: 700;
   font-size: 1.8rem;
   cursor: pointer;
@@ -90,13 +91,18 @@ input {
   gap: 3.2rem;
   align-items: center;
 }
-.actions{
+.actions {
   background-color: black;
   height: 408px;
   position: absolute;
   top: 157px;
   left: 0;
   box-shadow: 0 0 5px 1px white;
+  p {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+  }
 }
 .actions button,
 .list select {
@@ -104,9 +110,8 @@ input {
   padding: 0.8rem 2.4rem;
   font-size: 1.4rem;
   font-weight: 700;
-  margin: 3rem 2rem;
+  margin: 10px 2rem 3rem;
   display: flex;
-
 }
 
 .list ul {
