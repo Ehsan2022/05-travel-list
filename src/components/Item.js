@@ -9,8 +9,8 @@ export default function Item({ item, handleDeleteItem, handleToggleItem }) {
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button onClick={() => handleDeleteItem(item.id)}>
-        <span>X</span>
+      <button className="close" onClick={() => handleDeleteItem(item.id)}>
+        <span>❌</span>
       </button>
     </li>
   );
